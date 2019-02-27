@@ -1,0 +1,233 @@
+@import "vars"
+@import "fonts"
+@import "libs"
+
+::placeholder
+	color: #666
+
+::selection
+	background-color: $accent
+	color: #fff
+
+body
+	font-size: 16px
+	min-width: 320px
+	position: relative
+	line-height: 1.65
+	margin: 0
+	padding: 0
+	font-family: $default-font
+	overflow-x: hidden
+	color: $text
+	input, textarea
+		border: #666 1px solid
+		outline: none
+		&:focus:required:invalid
+			border-color: red
+		&:required:valid
+			border-color: green
+
+.img-responsive
+	display: block
+	max-width: 100%
+	height: auto
+	&.img-width
+		width: 100%
+
+.text-center
+	text-align: center
+
+b, strong
+	font-weight: bold
+
+
+// n is number of stars required
+@function multiple-box-shadow ($n) 
+  $value: '#{random(2000)}px #{random(2000)}px #FFF'
+  @for $i from 2 through $n
+    $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF'
+
+  @return unquote($value)
+
+$shadows-small:  multiple-box-shadow(700)
+$shadows-medium: multiple-box-shadow(200)
+$shadows-big:    multiple-box-shadow(100)
+
+html
+	margin: 0
+	padding: 0
+  //background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%)
+    
+#stars
+	width: 1px
+	height: 1px
+	background: transparent
+	box-shadow: $shadows-small
+	animation: animStar 50s linear infinite
+	&:after
+		content: " "
+		position: fixed
+		top: 2000px
+		width: 1px
+		z-index: 5555
+		height: 1px
+		background: transparent
+		box-shadow: $shadows-small
+    
+#stars2
+	width: 2px
+	height: 2px
+	background: transparent
+	box-shadow: $shadows-medium
+	animation: animStar 100s linear infinite
+	&:after
+		content: " "
+		position: fixed
+		top: 2000px
+		width: 2px
+		z-index: 555
+		height: 2px
+		background: transparent
+		box-shadow: $shadows-medium
+    
+#stars3
+	width: 3px
+	height: 3px
+	background: transparent
+	z-index: 555
+	box-shadow: $shadows-big
+	animation: animStar 150s linear infinite
+	&:after
+		content: " "
+		position: fixed
+		top: 2000px
+		width: 3px
+		z-index: 5555
+		height: 3px
+		background: transparent
+		box-shadow: $shadows-big
+  
+  span
+    background: -webkit-linear-gradient(white, #38495a)
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    
+@keyframes animStar
+  from	
+    transform: translateY(0px)
+  to		
+    transform: translateY(-2000px)
+    
+.header
+	min-height: 100vh
+	background-repeat: no-repeat
+	background-size: 100% 100%
+	position: relative
+	z-index: -1
+	background-position: center top
+	background-image: url('../img/header_bg.png')
+.page_wrapper
+	height: 2000px
+	background-repeat: no-repeat
+	background-size: cover
+	position: relative
+	z-index: 5
+	background-position: center top
+	background-image: url('../img/page_bg.png')
+	//background: radial-gradient(rgba(0, 0, 0, 0), #000), linear-gradient(130deg, #000 0%, #0e1449 37%, #330a2d 51%, #0e1449 67%, #000 100%)
+.header_content
+	height: 100%
+	.planet_white
+		width: 300px
+		position: absolute
+		top: 10%
+		right: 10%
+	.header_label
+		background-repeat: no-repeat
+		background-size: 100% 100%
+		position: relative
+		background-position: center top
+		background-image: url('../img/label_img.png')
+		width: 800px
+		height: 600px
+		display: flex
+		flex-direction: column
+		align-items: center
+		justify-content: center
+		color: #ffffff
+		position: absolute
+		top: 50%
+		left: 50%
+		z-index: 6
+		transform: translate(-50%,-50%)
+		h2
+			font-size: 60px
+			margin: 0
+			line-height: 1
+			font-weight: normal
+		h1
+			font-size: 200px
+			margin: 0
+			line-height: 1
+			font-weight: normal
+		h3
+			font-size: 22px
+			margin: 0
+			line-height: 1
+			font-weight: normal
+@keyframes floating
+  from
+    transform: translateY(0px)
+  65%
+    transform: translateY(15px)
+  to
+    transform: translateY(0px)
+@keyframes move-astronaut
+  100%
+    transform: translate(-160px, -160px)
+@keyframes rotate-astronaut
+  100%
+    transform: rotate(-720deg)
+@keyframes rocket
+	10%
+		left: 80%
+		bottom: 110%
+	20%
+		left: 70%
+		bottom: -10%
+		transform: rotate(20deg)
+	30%
+		left: -10%
+		bottom: 50%
+	40%
+		left: 50%
+		bottom: 110%
+		transform: rotate(60deg)
+	50%
+		left: 100%
+		bottom: 0%
+	60%
+		left: -10%
+		bottom: 50%
+		transform: rotate(40deg)
+	to
+		left: 80%
+		bottom: 110%
+.box_astronaut
+  position: absolute
+  bottom: 0%
+  right: 30%
+  will-change: transform
+  animation: move-astronaut 50s infinite linear both alternate
+  z-index: 1
+.astronaut
+	width: 250px
+	animation: rotate-astronaut 200s infinite linear both alternate
+.rocket
+	width: 80px
+	position: absolute
+	bottom: 0
+	left: 0
+	transition: all .3s ease
+	animation: rocket 100s infinite linear both alternate
+@import "media" // Always at the end
